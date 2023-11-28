@@ -29,8 +29,7 @@ namespace Blog.Controllers
                 DisplayName = addTagRequest.DisplayName
             };
 
-            await _blogDbContext.Tags.AddAsync(tag);
-            await _blogDbContext.SaveChangesAsync();
+            
 
             return RedirectToAction("List");
         }
