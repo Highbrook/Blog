@@ -1,9 +1,10 @@
 ﻿using Blog.Data;
 using Blog.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Repositories
 {
-    public class TagRepository : ITagInterface
+    public class TagRepository : ITagRepository
     {
         private readonly BlogDbContext blogDbContext;
 
@@ -20,24 +21,40 @@ namespace Blog.Repositories
             return tag;
         }
 
-        public Task<Tag?> DeleteAsync(Guid id)
+        public async Task<Tag?> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingTag = await blogDbContext.Tags.FindAsync(id);
+            if (existingTag != null)
+            {
+                blogDbContext.Tags.Remove(existingTag);
+                await blogDbContext.SaveChangesAsync();
+                return existingTag;
+            }
+            return null;
         }
 
-        public Task<IEnumerable<Tag>> GetAllAsync()
+        public async Task<IEnumerable<Tag>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await blogDbContext.Tags.ToListAsync();
         }
 
         public Task<Tag?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return blogDbContext.Tags.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public Task<Tag?> UpdateAsync(Tag tag)
+        public async Task<Tag?> UpdateAsync(Tag tag)
         {
-            throw new NotImplementedException();
+            var existingTag = await blogDbContext.Tags.FindAsync(tag.Id);
+            if (existingTag != null)
+            {
+                existingTag.Name = tag.Name;
+                existingTag.DisplayName = tag.DisplayName;
+                await blogDbContext.SaveChangesAsync();
+
+                return existingTag;
+            }
+            return null;
         }
     }
 }
