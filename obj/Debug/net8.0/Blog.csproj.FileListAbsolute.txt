@@ -135,3 +135,5 @@ D:\UnityProjects\Git\Blog\Blog\obj\Debug\net8.0\refint\Blog.dll
 D:\UnityProjects\Git\Blog\Blog\obj\Debug\net8.0\Blog.pdb
 D:\UnityProjects\Git\Blog\Blog\obj\Debug\net8.0\Blog.genruntimeconfig.cache
 D:\UnityProjects\Git\Blog\Blog\obj\Debug\net8.0\ref\Blog.dll
+D:\UnityProjects\Git\Blog\Blog\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\UnityProjects\Git\Blog\Blog\bin\Debug\net8.0\Newtonsoft.Json.dll
